@@ -1,0 +1,36 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cjvqc6jlxj7tq"]
+
+[ext_resource type="Texture2D" uid="uid://63ol3aiiban4" path="res://pngs/test1.png" id="1_x6rd2"]
+[ext_resource type="Texture2D" uid="uid://cipq36hlxyyxk" path="res://pngs/test2.png" id="2_n3m72"]
+[ext_resource type="Texture2D" uid="uid://6xujhs683gd5" path="res://pngs/idle_test1.png" id="3_m46kr"]
+[ext_resource type="Texture2D" uid="uid://bsgcnpg6scug1" path="res://pngs/idle_test2.png" id="4_4xbj4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x6rd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_n3m72")
+}],
+"loop": true,
+"name": &"flying_test",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_m46kr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4xbj4")
+}],
+"loop": true,
+"name": &"idle_test",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
