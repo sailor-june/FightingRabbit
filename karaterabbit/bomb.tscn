@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0dwfyvs71ljw"]
+
+[ext_resource type="Texture2D" uid="uid://d4m44abe4qx56" path="res://pngs/boom.png" id="1_kdv2o"]
+[ext_resource type="Script" path="res://bomb.gd" id="1_nvl4f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7xbw"]
+radius = 94.7008
+
+[node name="bomb" type="Area2D"]
+script = ExtResource("1_nvl4f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("CircleShape2D_n7xbw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kdv2o")
