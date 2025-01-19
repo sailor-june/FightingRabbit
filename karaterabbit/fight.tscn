@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bimnghu24e4ci"]
+
+[ext_resource type="Script" path="res://fight.gd" id="1_2y406"]
+
+[node name="idkm8" type="Node2D"]
+script = ExtResource("1_2y406")
