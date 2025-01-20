@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv81kvm75wu6p"]
+
+[ext_resource type="Script" path="res://label.gd" id="1_l4q7u"]
+[ext_resource type="Script" path="res://label3.gd" id="2_fg41u"]
+[ext_resource type="Script" path="res://button.gd" id="3_6jck7"]
+
+[node name="UI_Debug" type="VBoxContainer"]
+offset_right = 83.0
+offset_bottom = 152.0
+
+[node name="ForceInputX" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 2000.0
+
+[node name="ForceInputY" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 2000.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "force
+"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("1_l4q7u")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 2
+text = "force
+"
+script = ExtResource("2_fg41u")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "LAUNCH!!"
+script = ExtResource("3_6jck7")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_launch_button_pressed"]

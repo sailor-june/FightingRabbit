@@ -1,9 +1,9 @@
-extends Node2D
-
+extends Node
+class_name  fight
 # Constants
 const INPUT_BUFFER_SIZE = 10  # Number of inputs to store
 const INPUT_TIMEOUT = 0.6  # Seconds before an input expires
-
+signal dragonfist
 # Input mappings (adjust to your setup)
 const INPUT_MAP = {
 	"up": "UP",
@@ -17,14 +17,18 @@ const INPUT_MAP = {
 
 var special_moves = {
 	"Fireball": ["DOWN", "RIGHT", "LIGHT"],
-	"Dragon's Fist": ["RIGHT", "DOWN", "RIGHT", "SPECIAL"]
+	"Dragonfist": ["RIGHT", "DOWN", "RIGHT", "SPECIAL"]
 }
-
+var special_velocities = {
+	"Fireball": Vector2(750,300),
+	"Dragonfist": Vector2( 200, 1000)
+}
 # Variables
 var input_buffer: Array = []  # Stores recent inputs
 var input_times: Array = []   # Stores input timestamps
-
+var special_log: Array=[]
 func _process(delta: float) -> void:
+	
 	# Clear expired inputs
 	_prune_input_buffer()
 	
@@ -48,6 +52,7 @@ func _prune_input_buffer() -> void:
 			print("Removed expiredinput:", input_buffer[0])  # Debug: Print expired input
 			input_buffer.pop_front()
 			input_times.pop_front()
+			
 	else:
 		return
 func _add_input(input: String) -> void:
@@ -79,3 +84,12 @@ func _test_special_moves() -> void:
 			print(move_name, " Executed!")
 			input_buffer.clear()
 			input_times.clear()
+			var current_time = Time.get_ticks_msec() / 1000.0
+			special_log.append([current_time,move_name])
+			for move in special_velocities.keys():
+				if move_name == move:
+					$"../".launch(special_velocities[move])
+					$"../".transitioned.emit(move_name)
+				
+				
+				

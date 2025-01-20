@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var ground_scene: PackedScene = load("res://ground_segment.tscn" )
-@export var segment_length: float = 64
+@export var segment_length: float = 32
 @onready var ground_y: float = 0# Y position of the ground
 
 var active_segments = []  # Store ground segment references
@@ -17,12 +17,12 @@ func _ready():
 
 func _process(delta):
 	# Get the camera position and viewport width
-	var camera_x = $"../Bunny/Camera2D".global_position.x
+	var camera_x = 640
 	var viewport_width = get_viewport_rect().size.x
 
 	# Calculate the viewport bounds
-	var left_bound = camera_x - viewport_width / 2
-	var right_bound = camera_x + viewport_width / 2
+	var left_bound = camera_x - viewport_width 
+	var right_bound = camera_x + viewport_width 
 
 	# Spawn new segments if the right edge is near
 	while next_spawn_x < right_bound + segment_length:
@@ -46,3 +46,4 @@ func spawn_ground_segment(position_x: float):
 	add_child(segment)
 	segment.position = Vector2(position_x, ground_y)
 	active_segments.append(segment)
+	segment.add_to_group("floor")

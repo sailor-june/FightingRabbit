@@ -1,0 +1,316 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2syfv3vxdb2n"]
+
+[ext_resource type="Script" path="res://bunny.gd" id="1_3myy0"]
+[ext_resource type="SpriteFrames" uid="uid://cjvqc6jlxj7tq" path="res://bunny_frames.tres" id="1_jwmk4"]
+[ext_resource type="Script" path="res://bunny_collision.gd" id="2_g32x8"]
+[ext_resource type="Script" path="res://fight.gd" id="2_pfjvc"]
+[ext_resource type="Script" path="res://button.gd" id="3_wcmf5"]
+[ext_resource type="PackedScene" uid="uid://uhmqnmex3yqb" path="res://ground_segment.tscn" id="4_ajhq5"]
+[ext_resource type="Script" path="res://label.gd" id="4_rieci"]
+[ext_resource type="PackedScene" uid="uid://bjg0y1ygl4arh" path="res://statemachine.tscn" id="5_cweuh"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Bunny" type="RigidBody2D" parent="."]
+collision_mask = 2
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_3myy0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bunny"]
+polygon = PackedVector2Array(4, -13, 9, -3, 9, 5, 5, 8, 8, 16, -12, 16, -8, 4, -10, -2, 0, -14)
+script = ExtResource("2_g32x8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bunny"]
+texture_filter = 1
+sprite_frames = ExtResource("1_jwmk4")
+animation = &"dragonfist"
+
+[node name="Camera2D" type="Camera2D" parent="Bunny/AnimatedSprite2D"]
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Bunny/AnimatedSprite2D/Camera2D"]
+
+[node name="Button" type="Button" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer"]
+offset_right = 38.0
+offset_bottom = 31.0
+text = "test"
+script = ExtResource("3_wcmf5")
+force_y = 1000
+
+[node name="Label" type="Label" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("4_rieci")
+
+[node name="fight" type="Node" parent="Bunny"]
+script = ExtResource("2_pfjvc")
+
+[node name="Timer" type="Timer" parent="Bunny"]
+
+[node name="groundsegment" parent="." instance=ExtResource("4_ajhq5")]
+collision_layer = 2
+
+[node name="groundsegment2" parent="." instance=ExtResource("4_ajhq5")]
+position = Vector2(-63, 62)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment6" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(254, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment7" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(286, 0)
+collision_layer = 2
+
+[node name="groundsegment8" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(350, 0)
+collision_layer = 2
+
+[node name="groundsegment9" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(318, 0)
+collision_layer = 2
+
+[node name="groundsegment10" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(509, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment6" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(254, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment7" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(286, 0)
+collision_layer = 2
+
+[node name="groundsegment8" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(350, 0)
+collision_layer = 2
+
+[node name="groundsegment9" parent="groundsegment2/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(318, 0)
+collision_layer = 2
+
+[node name="groundsegment11" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(541, 0)
+collision_layer = 2
+
+[node name="groundsegment12" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(605, 0)
+collision_layer = 2
+
+[node name="groundsegment13" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(573, 0)
+collision_layer = 2
+
+[node name="groundsegment14" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(1018, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment6" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(254, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment14/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment14/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment14/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment14/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment7" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(286, 0)
+collision_layer = 2
+
+[node name="groundsegment8" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(350, 0)
+collision_layer = 2
+
+[node name="groundsegment9" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(318, 0)
+collision_layer = 2
+
+[node name="groundsegment10" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(509, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment6" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(254, 0)
+collision_layer = 2
+
+[node name="groundsegment2" parent="groundsegment2/groundsegment14/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(127, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="groundsegment2/groundsegment14/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(159, 0)
+collision_layer = 2
+
+[node name="groundsegment4" parent="groundsegment2/groundsegment14/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(223, 0)
+collision_layer = 2
+
+[node name="groundsegment5" parent="groundsegment2/groundsegment14/groundsegment10/groundsegment6" instance=ExtResource("4_ajhq5")]
+position = Vector2(191, 0)
+collision_layer = 2
+
+[node name="groundsegment7" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(286, 0)
+collision_layer = 2
+
+[node name="groundsegment8" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(350, 0)
+collision_layer = 2
+
+[node name="groundsegment9" parent="groundsegment2/groundsegment14/groundsegment10" instance=ExtResource("4_ajhq5")]
+position = Vector2(318, 0)
+collision_layer = 2
+
+[node name="groundsegment11" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(541, 0)
+collision_layer = 2
+
+[node name="groundsegment12" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(605, 0)
+collision_layer = 2
+
+[node name="groundsegment13" parent="groundsegment2/groundsegment14" instance=ExtResource("4_ajhq5")]
+position = Vector2(573, 0)
+collision_layer = 2
+
+[node name="groundsegment15" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(1050, 0)
+collision_layer = 2
+
+[node name="groundsegment16" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(1114, 0)
+collision_layer = 2
+
+[node name="groundsegment17" parent="groundsegment2" instance=ExtResource("4_ajhq5")]
+position = Vector2(1082, 0)
+collision_layer = 2
+
+[node name="groundsegment3" parent="." instance=ExtResource("4_ajhq5")]
+position = Vector2(-31, 62)
+collision_layer = 2
+
+[node name="groundsegment4" parent="." instance=ExtResource("4_ajhq5")]
+position = Vector2(33, 62)
+collision_layer = 2
+
+[node name="groundsegment5" parent="." instance=ExtResource("4_ajhq5")]
+position = Vector2(1, 62)
+collision_layer = 2
+
+[node name="Statemachine" parent="." instance=ExtResource("5_cweuh")]
+
+[connection signal="body_entered" from="Bunny" to="Bunny" method="_on_body_entered"]
+[connection signal="animation_finished" from="Bunny/AnimatedSprite2D" to="Bunny" method="on_special_finished"]
+[connection signal="pressed" from="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/Button" to="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/Button" method="_on_launch_button_pressed"]
+[connection signal="dragonfist" from="Bunny/fight" to="Bunny" method="on_dragonfist"]
+[connection signal="timeout" from="Bunny/Timer" to="Bunny" method="_on_Timer_timeout"]

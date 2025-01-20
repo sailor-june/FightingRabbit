@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjg0y1ygl4arh"]
+[gd_scene load_steps=5 format=3 uid="uid://bjg0y1ygl4arh"]
 
 [ext_resource type="Script" path="res://statemachine.gd" id="1_6mrug"]
-[ext_resource type="Script" path="res://State.gd" id="1_a4lsp"]
+[ext_resource type="Script" path="res://idle_state.gd" id="2_j57mk"]
+[ext_resource type="Script" path="res://flying_state.gd" id="3_x57fd"]
+[ext_resource type="Script" path="res://dp.gd" id="4_nbotx"]
 
-[node name="Statemachine" type="Node2D"]
+[node name="Statemachine" type="Node2D" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_6mrug")
+initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="."]
-script = ExtResource("1_a4lsp")
+script = ExtResource("2_j57mk")
+
+[node name="Flying" type="Node" parent="."]
+script = ExtResource("3_x57fd")
+
+[node name="dragonfist" type="Node" parent="."]
+script = ExtResource("4_nbotx")

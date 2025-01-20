@@ -1,16 +1,15 @@
 extends Node
 class_name State
-signal Transitioned
+signal transitioned
 
 
 
 func Enter():
-
-	$AnimatedSprite2D.play("idle")
-	
+	pass
 	
 func Exit():
-	Transitioned.emit()
+	pass
+	
 func Update(_delta:float):
 	pass
 func Physics_Update(_delta:float ):

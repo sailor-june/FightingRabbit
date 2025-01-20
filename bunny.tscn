@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuxxsccb2kpkp"]
+[gd_scene load_steps=4 format=3 uid="uid://cuxxsccb2kpkp"]
 
 [ext_resource type="Script" path="res://bunny.gd" id="1_phda2"]
 [ext_resource type="SpriteFrames" uid="uid://cjvqc6jlxj7tq" path="res://bunny_frames.tres" id="2_8akdl"]
+[ext_resource type="Script" path="res://fight.gd" id="3_47j0a"]
 
 [node name="Bunny" type="RigidBody2D"]
 script = ExtResource("1_phda2")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(5, -1)
-polygon = PackedVector2Array(2, -20, 6, -16, 12, -16, 15, -7, 21, -6, 19, 3, 24, 7, 19, 11, 21, 18, 7, 22, 1, 32, -10, 23, -23, 23, -22, 14, -31, 11, -28, 4, -29, -8, -19, -10, -15, -18, -6, -16)
+[node name="fight" type="Node" parent="."]
+script = ExtResource("3_47j0a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = ExtResource("2_8akdl")
-animation = &"flying_test"
+animation = &"dragonfist"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -14, 5, -13, 5, -6, 8, -1, 10, 2, 9, 7, 5, 16, -12, 16, -7, 1, -4, -13)
+
+[connection signal="dragonfist" from="fight" to="." method="on_dragonfist"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_special_finished"]
