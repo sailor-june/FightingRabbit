@@ -8,7 +8,7 @@ var force: float = 0.0
 var is_flying: bool = false
 var is_special: bool = false
 var is_crashed: bool = false
-
+@export var stamina = 2
 	
 func on_special_finished():
 	emit_signal("transitioned", "flying")

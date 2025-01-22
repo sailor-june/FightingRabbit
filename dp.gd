@@ -9,6 +9,7 @@ func _ready():
 
 func Enter():
 	print("dp state entered")
+	bunny.rotation = 0
 	bunny_sprite.play("dragonfist")
 	bunny.is_special = true
 func Exit():

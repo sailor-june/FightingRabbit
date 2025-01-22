@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cncsbhrkic5ga"]
+
+[ext_resource type="Script" path="res://fireball_entity.gd" id="1_j5rlr"]
+[ext_resource type="Texture2D" uid="uid://cw2jvxdq13fjo" path="res://pngs/fireball.png" id="1_txi63"]
+
+[node name="fireball" type="Sprite2D"]
+texture = ExtResource("1_txi63")
+script = ExtResource("1_j5rlr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-10, -10, 20, 19.495)

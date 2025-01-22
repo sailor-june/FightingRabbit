@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://flying_state.gd" id="3_x57fd"]
 [ext_resource type="Script" path="res://dp.gd" id="4_nbotx"]
 [ext_resource type="Script" path="res://crashed.gd" id="5_o6fw1"]
-[ext_resource type="Script" path="res://pngs/fireball.gd" id="6_iakd2"]
+[ext_resource type="Script" path="res://pngs/fireball_state.gd" id="6_iakd2"]
 
 [node name="Statemachine" type="Node2D" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_6mrug")
