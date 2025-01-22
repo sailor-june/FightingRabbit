@@ -31,16 +31,18 @@ zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Bunny/AnimatedSprite2D/Camera2D"]
 
-[node name="Button" type="Button" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer"]
-offset_right = 38.0
-offset_bottom = 31.0
-text = "test"
+[node name="VBoxContainer" type="VBoxContainer" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "reset"
 script = ExtResource("3_wcmf5")
 force_y = 1000
 
-[node name="Label" type="Label" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Label" type="Label" parent="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/VBoxContainer"]
+layout_mode = 2
 script = ExtResource("4_rieci")
 
 [node name="fight" type="Node" parent="Bunny"]
@@ -311,6 +313,6 @@ collision_layer = 2
 
 [connection signal="body_entered" from="Bunny" to="Bunny" method="_on_body_entered"]
 [connection signal="animation_finished" from="Bunny/AnimatedSprite2D" to="Bunny" method="on_special_finished"]
-[connection signal="pressed" from="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/Button" to="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/Button" method="_on_launch_button_pressed"]
+[connection signal="pressed" from="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/VBoxContainer/Button" to="Bunny/AnimatedSprite2D/Camera2D/CanvasLayer/VBoxContainer/Button" method="_on_launch_button_pressed"]
 [connection signal="dragonfist" from="Bunny/fight" to="Bunny" method="on_dragonfist"]
-[connection signal="timeout" from="Bunny/Timer" to="Bunny" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Bunny/Timer" to="Bunny" method="_on_timer_timeout"]

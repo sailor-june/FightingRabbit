@@ -7,12 +7,8 @@ signal transitioned(state: String)
 var force: float = 0.0
 var is_flying: bool = false
 var is_special: bool = false
+var is_crashed: bool = false
 
-func on_dragonfist():
-	print("dp detected")
-	var is_special = true
-	emit_signal("transitioned","dragonfist")
-	$AnimatedSprite2D.play("dragonfist")
 	
 func on_special_finished():
 	emit_signal("transitioned", "flying")
@@ -27,13 +23,18 @@ func launch(force: Vector2):
 
 func _on_body_entered(body: Node) -> void:
 	print("Collision detected with:", body.name)
-	if not timer.is_stopped():
-		timer.stop()  # Stop any active timer before starting a new one
-	timer.start(1.0)  # Start a 2-second timer
+	if is_flying:
+		if not timer.is_stopped():
+			timer.stop()  # Stop any active timer before starting a new one
+		timer.start(0.25)  # Start a 1-second timer
 
-func _on_Timer_timeout() -> void:
-	
+
+
+
+
+func _on_timer_timeout() -> void:
 	if get_contact_count() > 0:
-		emit_signal("transitioned", "idle")
+		emit_signal("transitioned", "crashed")
+		rotation = 0
 	else:
 		print("No contact detected when timer expired. Remaining in current state.")

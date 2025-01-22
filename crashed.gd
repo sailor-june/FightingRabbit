@@ -1,5 +1,5 @@
 extends State
-class_name dragonfist
+class_name crashed
 var bunny : Bunny
 var bunny_sprite = Sprite2D
 func _ready():
@@ -8,13 +8,12 @@ func _ready():
 # Called when the node enters the scene tree for the first time.
 
 func Enter():
-	print("dp state entered")
-	bunny_sprite.play("dragonfist")
-	bunny.is_special = true
+	print("crash state enter")
+	bunny.is_crashed = true
+	bunny_sprite.play("crashed")
+	
 func Exit():
-	print("Exited dp state")
-	bunny.is_special = false
-
+	pass
 func Update(_delta:float):
 	pass
 func Physics_Update(_delta:float ):

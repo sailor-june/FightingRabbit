@@ -24,7 +24,7 @@ func on_bunny_transition(new_state_name: String) -> void:
 		current_state = new_state
 		
 		
-			#
+			
 func on_child_transition(state, new_state_name):
 	if state != current_state:
 		return

@@ -1,6 +1,6 @@
 extends Node
 class_name  fight
-# Constants
+
 const INPUT_BUFFER_SIZE = 10  # Number of inputs to store
 const INPUT_TIMEOUT = 0.6  # Seconds before an input expires
 signal dragonfist
@@ -24,6 +24,7 @@ var special_velocities = {
 	"Dragonfist": Vector2( 200, 1000)
 }
 # Variables
+@onready var bunny = $".."
 var input_buffer: Array = []  # Stores recent inputs
 var input_times: Array = []   # Stores input timestamps
 var special_log: Array=[]
@@ -78,18 +79,20 @@ func detect_special_move(special_move: Array) -> bool:
 
 # Test special_moves
 func _test_special_moves() -> void:
-	for move_name in special_moves.keys():
-		var move_sequence = special_moves[move_name]
-		if detect_special_move(move_sequence):
-			print(move_name, " Executed!")
-			input_buffer.clear()
-			input_times.clear()
-			var current_time = Time.get_ticks_msec() / 1000.0
-			special_log.append([current_time,move_name])
-			for move in special_velocities.keys():
-				if move_name == move:
-					$"../".launch(special_velocities[move])
-					$"../".transitioned.emit(move_name)
-				
-				
-				
+	if !bunny.is_special:
+		if !bunny.is_crashed:
+			for move_name in special_moves.keys():
+				var move_sequence = special_moves[move_name]
+				if detect_special_move(move_sequence):
+					print(move_name, " Executed!")
+					input_buffer.clear()
+					input_times.clear()
+					var current_time = Time.get_ticks_msec() / 1000.0
+					special_log.append([current_time,move_name])
+					for move in special_velocities.keys():
+						if move_name == move:
+							$"../".launch(special_velocities[move])
+							$"../".transitioned.emit(move_name.to_lower())
+						
+						
+						
