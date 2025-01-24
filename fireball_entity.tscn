@@ -3,9 +3,12 @@
 [ext_resource type="Script" path="res://fireball_entity.gd" id="1_j5rlr"]
 [ext_resource type="Texture2D" uid="uid://cw2jvxdq13fjo" path="res://pngs/fireball.png" id="1_txi63"]
 
-[node name="fireball" type="Sprite2D"]
-texture = ExtResource("1_txi63")
+[node name="fireball" type="RigidBody2D"]
+gravity_scale = 0.0
 script = ExtResource("1_j5rlr")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-10, -10, 20, 19.495)
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_txi63")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg6ixx71utfe3"]
+
+[ext_resource type="Texture2D" uid="uid://d0ryms0c63oqd" path="res://pngs/carrot.png" id="1_jq8pm"]
+
+[node name="StaMeter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_jq8pm")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 22.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "6"

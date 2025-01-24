@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://fight.gd" id="3_47j0a"]
 
 [node name="Bunny" type="RigidBody2D"]
+collision_layer = 2
 script = ExtResource("1_phda2")
 
 [node name="fight" type="Node" parent="."]
@@ -18,5 +19,4 @@ animation = &"dragonfist"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -14, 5, -13, 5, -6, 8, -1, 10, 2, 9, 7, 5, 16, -12, 16, -7, 1, -4, -13)
 
-[connection signal="dragonfist" from="fight" to="." method="on_dragonfist"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_special_finished"]

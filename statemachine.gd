@@ -5,6 +5,7 @@ var current_state : State
 var states = {}
 @export var initial_state: State
 func _ready() -> void:
+	
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
@@ -36,3 +37,10 @@ func on_child_transition(state, new_state_name):
 		
 	new_state.Enter()
 	current_state = new_state
+	
+	
+func _process(delta: float) -> void:
+	current_state.Update(delta)
+
+func _physics_process(delta: float) -> void:
+	current_state.Physics_Update(delta)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://statemachine.gd" id="1_6mrug"]
 [ext_resource type="Script" path="res://idle_state.gd" id="2_j57mk"]
 [ext_resource type="Script" path="res://flying_state.gd" id="3_x57fd"]
-[ext_resource type="Script" path="res://dp.gd" id="4_nbotx"]
+[ext_resource type="Script" path="res://dp_state.gd" id="4_nbotx"]
 [ext_resource type="Script" path="res://crashed.gd" id="5_o6fw1"]
 [ext_resource type="Script" path="res://pngs/fireball_state.gd" id="6_iakd2"]
 

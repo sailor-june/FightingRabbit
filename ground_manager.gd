@@ -1,49 +1,69 @@
 extends Node2D
 
-@export var ground_scene: PackedScene = load("res://ground_segment.tscn" )
-@export var segment_length: float = 32
-@onready var ground_y: float = 0# Y position of the ground
+# Adjustable properties
+@export var ground_segment_scene: PackedScene = load("res://ground_segment.tscn")
+@export var ground_height: float = 64 # Y-coordinate for the ground level
+@export var camera_node_path: NodePath = "../Bunny/AnimatedSprite2D/Camera2D" # Path to the Camera2D node
 
-var active_segments = []  # Store ground segment references
-var next_spawn_x: float = 0  # Track where to spawn the next segment
+# Internal variables
+var ground_segments: Array = []
+var ground_width: int = 32  # Each ground segment is 32 pixels wide
+var screen_width: float = 0  # Dynamically calculated
+var extra_width: float = 0  # Half-screen width for extra buffer
 
 func _ready():
-	ground_y=(get_viewport_rect().size.y)
-	var width = (get_viewport_rect().size.x)
-	var segment_number = width/segment_length
-	for i in range(segment_number):  # Start with 3 segments (adjust as needed)
-		spawn_ground_segment(next_spawn_x)
-		next_spawn_x += segment_length
+	# Get screen width from the viewport
+	var camera = get_node_or_null(camera_node_path) as Camera2D
+	if not camera:
+		push_error("Camera2D node not found! Check the 'camera_node_path'.")
+		return
+	
+	screen_width = get_viewport_rect().size.x
+	extra_width = screen_width / 2
 
-func _process(delta):
-	# Get the camera position and viewport width
-	var camera_x = 640
-	var viewport_width = get_viewport_rect().size.x
+	# Spawn initial ground segments
+	var total_width = screen_width + extra_width * 2
+	var num_segments = int(ceil(total_width / ground_width))
+	for i in range(num_segments):
+		var segment = ground_segment_scene.instantiate()
+		segment.position = Vector2(i * ground_width, ground_height)
+		add_child(segment)
+		ground_segments.append(segment)
 
-	# Calculate the viewport bounds
-	var left_bound = camera_x - viewport_width 
-	var right_bound = camera_x + viewport_width 
+func _process(delta: float):
+	update_ground()
 
-	# Spawn new segments if the right edge is near
-	while next_spawn_x < right_bound + segment_length:
-		spawn_ground_segment(next_spawn_x)
-		next_spawn_x += segment_length
+func update_ground():
+	# Get the camera's current position
+	var camera = get_node_or_null(camera_node_path) as Camera2D
+	if not camera:
+		return
 
-	# Cleanup segments that are completely outside the viewport
-	var segments_to_remove = []
-	for segment in active_segments:
-		var segment_x = segment.global_position.x
-		if segment_x + segment_length < left_bound:  # Segment is completely offscreen to the left
-			segments_to_remove.append(segment)
+	var cam_position_x = camera.global_position.x
 
-	for segment in segments_to_remove:
-		active_segments.erase(segment)
-		segment.queue_free()
+	# Calculate the left and right boundaries for drawing ground
+	var left_boundary = cam_position_x - (screen_width / 2) - extra_width
+	var right_boundary = cam_position_x + (screen_width / 2) + extra_width
 
-func spawn_ground_segment(position_x: float):
-	# Instance and position a new ground segment
-	var segment = ground_scene.instantiate()
-	add_child(segment)
-	segment.position = Vector2(position_x, ground_y)
-	active_segments.append(segment)
-	segment.add_to_group("floor")
+	# Check if any ground segment needs to be recycled
+	for segment in ground_segments:
+		if segment.global_position.x + ground_width < left_boundary:
+			# Move segment to the right side
+			var max_x = get_max_ground_x()
+			segment.position.x = max_x + ground_width
+		elif segment.global_position.x > right_boundary:
+			# Move segment to the left side
+			var min_x = get_min_ground_x()
+			segment.position.x = min_x - ground_width
+
+func get_max_ground_x() -> float:
+	var max_x = float(-INF)
+	for segment in ground_segments:
+		max_x = max(max_x, segment.global_position.x)
+	return max_x
+
+func get_min_ground_x() -> float:
+	var min_x = float(INF)
+	for segment in ground_segments:
+		min_x = min(min_x, segment.global_position.x)
+	return min_x

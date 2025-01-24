@@ -5,5 +5,5 @@ extends Label
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text ="velocity: " + str(bunny.linear_velocity)
+	text ="position: " + str(bunny.global_position)
 	

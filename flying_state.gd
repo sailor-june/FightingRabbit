@@ -20,4 +20,5 @@ func Exit():
 	print("Exited flying state.")
 	
 func Update(_delta: float):
-	print("flying")
+	
+	bunny.apply_torque(300)

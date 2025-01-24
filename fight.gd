@@ -3,7 +3,7 @@ class_name  fight
 
 const INPUT_BUFFER_SIZE = 10  # Number of inputs to store
 const INPUT_TIMEOUT = 0.6  # Seconds before an input expires
-signal dragonfist
+#signal dragonfist
 # Input mappings (adjust to your setup)
 const INPUT_MAP = {
 	"up": "UP",
@@ -39,8 +39,8 @@ func _process(delta: float) -> void:
 			_add_input(INPUT_MAP[action])
 	
 	# Debug: Print the full input buffer
-	if input_buffer.size() > 0:
-		print("Current Input Buffer:", input_buffer)
+	#if input_buffer.size() > 0:
+		#print("Current Input Buffer:", input_buffer)
 	
 	# Test special_move detection
 	_test_special_moves()
@@ -50,7 +50,7 @@ func _prune_input_buffer() -> void:
 			# Remove inputs older than the timeout
 		var current_time = Time.get_ticks_msec() / 1000.0
 		while input_times.size() > 0 and current_time - input_times[0] > INPUT_TIMEOUT:
-			print("Removed expiredinput:", input_buffer[0])  # Debug: Print expired input
+		
 			input_buffer.pop_front()
 			input_times.pop_front()
 			
@@ -63,7 +63,7 @@ func _add_input(input: String) -> void:
 
 	# Maintain buffer size
 	if input_buffer.size() > INPUT_BUFFER_SIZE:
-		print("Removed oldest input due to buffer size limit:", input_buffer[0])  # Debug: Print removed input
+		
 		input_buffer.pop_front()
 		input_times.pop_front()
 
@@ -78,21 +78,23 @@ func detect_special_move(special_move: Array) -> bool:
 	return true
 
 # Test special_moves
-func _test_special_moves() -> void:
-	if !bunny.is_special:
-		if !bunny.is_crashed:
-			for move_name in special_moves.keys():
-				var move_sequence = special_moves[move_name]
-				if detect_special_move(move_sequence):
-					print(move_name, " Executed!")
-					input_buffer.clear()
-					input_times.clear()
-					var current_time = Time.get_ticks_msec() / 1000.0
-					special_log.append([current_time,move_name])
-					for move in special_velocities.keys():
-						if move_name == move:
-							$"../".launch(special_velocities[move])
-							$"../".transitioned.emit(move_name.to_lower())
+func _test_special_moves() -> void:	
+		if !bunny.is_special:
+			if !bunny.is_crashed:
+				for move_name in special_moves.keys():
+					var move_sequence = special_moves[move_name]
+					if detect_special_move(move_sequence):
 						
-						
-						
+						input_buffer.clear()
+						input_times.clear()
+						special_log.clear()
+						var current_time = Time.get_ticks_msec() / 1000.0
+						special_log.append([current_time,move_name])
+						for move in special_velocities.keys():
+							if move_name == move:
+								$"../".linear_velocity.y=0
+							
+								$"../".transitioned.emit(move_name.to_lower())
+								
+							
+							

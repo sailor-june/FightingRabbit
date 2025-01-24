@@ -8,11 +8,11 @@ var force: float = 0.0
 var is_flying: bool = false
 var is_special: bool = false
 var is_crashed: bool = false
-@export var stamina = 2
+@export var stamina = 0
 	
 func on_special_finished():
 	emit_signal("transitioned", "flying")
-	var is_special = false
+	is_special = false
 	
 func launch(force: Vector2):
 	apply_central_impulse(Vector2(force.x, force.y*-1))
